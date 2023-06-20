@@ -3,7 +3,7 @@ package ru.netology.springboot_h2.service;
 import org.springframework.stereotype.Service;
 import ru.netology.springboot_h2.exception.InvalidCredentials;
 import ru.netology.springboot_h2.exception.UnauthorizedUser;
-import ru.netology.springboot_h2.model.Authorities;
+import ru.netology.springboot_h2.permissions.Authorities;
 import ru.netology.springboot_h2.repository.UserRepository;
 
 import java.util.List;

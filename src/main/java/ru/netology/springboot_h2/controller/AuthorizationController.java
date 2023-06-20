@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.netology.springboot_h2.exception.InvalidCredentials;
 import ru.netology.springboot_h2.exception.UnauthorizedUser;
-import ru.netology.springboot_h2.model.Authorities;
+import ru.netology.springboot_h2.permissions.Authorities;
 import ru.netology.springboot_h2.service.AuthorizationService;
 
 import java.util.List;
@@ -28,11 +28,13 @@ public class AuthorizationController {
 
     @ExceptionHandler(InvalidCredentials.class)
     public ResponseEntity<String> iaeHandler(InvalidCredentials e) {
-        return new ResponseEntity<>("IllegalArgumentException in throwExceptionIne method", HttpStatus.NOT_FOUND);
+        System.out.println("EXCEPTION: " + e.getMessage());
+        return new ResponseEntity<>( "EXCEPTION: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UnauthorizedUser.class)
     public ResponseEntity<String> reHandler(UnauthorizedUser e) {
-        return new ResponseEntity<>("RuntimeException in throwExceptionIne method", HttpStatus.I_AM_A_TEAPOT);
+        System.out.println("EXCEPTION: " + e.getMessage());
+        return new ResponseEntity<>("EXCEPTION: " + e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }

@@ -1,7 +1,7 @@
 package ru.netology.springboot_h2.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.netology.springboot_h2.model.Authorities;
+import ru.netology.springboot_h2.permissions.Authorities;
 
 import java.util.ArrayList;
 import java.util.Collections;
