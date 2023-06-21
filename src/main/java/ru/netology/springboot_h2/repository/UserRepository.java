@@ -1,22 +1,24 @@
 package ru.netology.springboot_h2.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.netology.springboot_h2.model.Account;
 import ru.netology.springboot_h2.permissions.Authorities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
 @Repository
 public class UserRepository {
-    public List<Authorities> getUserAuthorities(String user, String password) {
+    public List<Authorities> getUserAuthorities(Account account) {
         List<Authorities> authorities = new ArrayList<>();
-        if (user.equals("Vasya") && password.equals("1234")) {
+        if (account.getUser().equals("Vasya") && account.getPassword().equals("1234")) {
             Collections.addAll(authorities, Authorities.READ, Authorities.WRITE, Authorities.DELETE);
-        } else if (user.equals("Olya") && password.equals("2345")) {
+        } else if (account.getUser().equals("Olya") && account.getPassword().equals("2345")) {
             Collections.addAll(authorities, Authorities.READ, Authorities.WRITE);
-        } else if (user.equals("Mariy") && password.equals("3456")) {
+        } else if (account.getUser().equals("Mariy") && account.getPassword().equals("3456")) {
             Collections.addAll(authorities, Authorities.READ);
         }
         return authorities;
     }
+
+
 }

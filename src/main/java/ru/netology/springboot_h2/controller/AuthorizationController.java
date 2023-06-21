@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.netology.springboot_h2.exception.InvalidCredentials;
 import ru.netology.springboot_h2.exception.UnauthorizedUser;
+import ru.netology.springboot_h2.model.Account;
 import ru.netology.springboot_h2.permissions.Authorities;
 import ru.netology.springboot_h2.service.AuthorizationService;
 
@@ -21,14 +22,18 @@ public class AuthorizationController {
         this.service = service;
     }
 
+//    @GetMapping("/authorize")
+//    public List<Authorities> getAuthorities(@RequestParam("user") String user, @RequestParam("password") String password) {
+//        return service.getAuthorities(user, password);
+//    }
+
     @GetMapping("/authorize")
-    public List<Authorities> getAuthorities(@RequestParam("user") String user, @RequestParam("password") String password) {
-        return service.getAuthorities(user, password);
+    public List<Authorities> getAuthorities(Account account) {
+        return service.getAuthorities(account);
     }
 
     @ExceptionHandler(InvalidCredentials.class)
     public ResponseEntity<String> iaeHandler(InvalidCredentials e) {
-        System.out.println("EXCEPTION: " + e.getMessage());
         return new ResponseEntity<>( "EXCEPTION: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

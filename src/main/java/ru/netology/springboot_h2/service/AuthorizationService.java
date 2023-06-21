@@ -3,6 +3,7 @@ package ru.netology.springboot_h2.service;
 import org.springframework.stereotype.Service;
 import ru.netology.springboot_h2.exception.InvalidCredentials;
 import ru.netology.springboot_h2.exception.UnauthorizedUser;
+import ru.netology.springboot_h2.model.Account;
 import ru.netology.springboot_h2.permissions.Authorities;
 import ru.netology.springboot_h2.repository.UserRepository;
 
@@ -15,13 +16,13 @@ public class AuthorizationService {
         this.userRepository = userRepository;
     }
 
-     public List<Authorities> getAuthorities(String user, String password) {
-        if (isEmpty(user) || isEmpty(password)) {
+     public List<Authorities> getAuthorities(Account account) {
+        if (isEmpty(account.getUser()) || isEmpty(account.getPassword())) {
             throw new InvalidCredentials("User name or password is empty");
         }
-        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
+        List<Authorities> userAuthorities = userRepository.getUserAuthorities(account);
         if (isEmpty(userAuthorities)) {
-            throw new UnauthorizedUser("Unknown user " + user);
+            throw new UnauthorizedUser("Unknown user " + account.getUser());
         }
         return userAuthorities;
     }
