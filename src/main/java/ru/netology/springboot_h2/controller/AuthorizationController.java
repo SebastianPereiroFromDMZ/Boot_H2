@@ -18,9 +18,14 @@ import java.util.List;
 public class AuthorizationController {
     AuthorizationService service;
 
-    public AuthorizationController(AuthorizationService service) {
+    public AuthorizationController(AuthorizationService service){
         this.service = service;
     }
+
+//    @GetMapping("/authorize")
+//    public List<Authorities> getAuthorities(@RequestParam("user") String user, @RequestParam("password") String password) {
+//        return service.getAuthorities(user, password);
+//    }
 
     @GetMapping("/authorize")
     public List<Authorities> getAuthorities(Account account) {
@@ -29,7 +34,7 @@ public class AuthorizationController {
 
     @ExceptionHandler(InvalidCredentials.class)
     public ResponseEntity<String> iaeHandler(InvalidCredentials e) {
-        return new ResponseEntity<>("EXCEPTION: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>( "EXCEPTION: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UnauthorizedUser.class)
